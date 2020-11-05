@@ -4,3 +4,4 @@
 /.idea/sonarlint
 /.idea/inspectionProfiles
 /.gradle
+**/build
