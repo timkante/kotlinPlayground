@@ -1,28 +1,49 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    application
     kotlin("jvm") version "1.4.0"
     kotlin("plugin.serialization") version "1.4.0"
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("org.litote.kmongo:kmongo-coroutine:4.1.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0-RC")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0-M1")
+    runtimeOnly(project(":core"))
 }
 
-tasks {
-    withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "14"
+allprojects {
+    group = "kotlin.dev.timkante"
+    version = "1.0-SNAPSHOT"
+
+    this.allprojects
+        .filterNot {
+            it.name == "platform"
         }
+        .forEach {
+            it.apply {
+                plugin("org.jetbrains.kotlin.jvm")
+                plugin("org.jetbrains.kotlin.plugin.serialization")
+
+                kotlin.sourceSets["main"].kotlin.srcDirs("src")
+                kotlin.sourceSets["test"].kotlin.srcDirs("test")
+
+                sourceSets["main"].resources.srcDirs("resources")
+                sourceSets["test"].resources.srcDirs("testresources")
+
+                tasks {
+                    withType<KotlinCompile> {
+                        kotlinOptions {
+                            jvmTarget = "14"
+                        }
+                    }
+                }
+            }
+        }
+
+    repositories {
+        mavenCentral()
     }
+}
+
+application {
+    mainClass.set("kotlin.dev.timkante.playground.core.Application")
 }
