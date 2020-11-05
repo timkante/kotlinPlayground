@@ -45,5 +45,5 @@ allprojects {
 }
 
 application {
-    mainClass.set("kotlin.dev.timkante.playground.core.Application")
+    mainClass.set("dev.timkante.playground.ApplicationKt")
 }
