@@ -7,6 +7,6 @@ dependencies {
     constraints {
         api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
         api 'org.litote.kmongo:kmongo-coroutine:4.2.5'
-        api 'org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0'
+        api 'org.jetbrains.kotlinx:kotlinx-serialization-core:1.1.0'
     }
 }
